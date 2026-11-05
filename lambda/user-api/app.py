@@ -15,6 +15,8 @@ import logging
 import os
 import uuid
 
+import boto3
+
 import psycopg2
 from psycopg2.extras import RealDictCursor
 
