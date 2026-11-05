@@ -23,11 +23,11 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      # - name: Set environment variables
-      #   run: |
-      #     ACCOUNT_ID=$(aws sts get-caller-identity --query Account --output text)
-      #     echo "ACCOUNT_ID=${ACCOUNT_ID}" >> $GITHUB_ENV
-      #     echo "ECR_REGISTRY=${ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com" >> $GITHUB_ENV
+      - name: Set environment variables
+        run: |
+          ACCOUNT_ID=$(aws sts get-caller-identity --query Account --output text)
+          echo "ACCOUNT_ID=${ACCOUNT_ID}" >> $GITHUB_ENV
+          echo "ECR_REGISTRY=${ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com" >> $GITHUB_ENV
 
       - name: Login to Amazon ECR
         run: |
