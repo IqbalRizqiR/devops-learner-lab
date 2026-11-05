@@ -190,7 +190,7 @@ jobs:
       - name: Cleanup Docker images
         if: always()
         run: |
-          docker rmi ${ECR_REGISTRY}/${PREFIX}/user-api:latest \
+          sudo docker rmi ${ECR_REGISTRY}/${PREFIX}/user-api:latest \
                      ${ECR_REGISTRY}/${PREFIX}/user-api:${GITHUB_SHA::8} \
                      ${ECR_REGISTRY}/${PREFIX}/order-api:latest \
                      ${ECR_REGISTRY}/${PREFIX}/order-api:${GITHUB_SHA::8} \
