@@ -144,17 +144,17 @@ jobs:
               --region ${AWS_REGION})
 
             URL=$(echo $DEPLOYMENT_JSON | jq -r .zipUploadUrl)
-            JOB_ID=$(echo $DEPLOYMENT_JSON | jq -r .jobId)
+            JOBS_ID=$(echo $DEPLOYMENT_JSON | jq -r .jobId)
 
             curl -X PUT -T frontend.zip "$URL"
 
             aws amplify start-deployment \
               --app-id ${APP_ID} \
               --branch-name main \
-              --job-id ${JOB_ID} \
+              --job-id ${JOBS_ID} \
               --region ${AWS_REGION}
 
-            echo "Frontend deployment started: ${JOB_ID}"
+            echo "Frontend deployment started: ${JOBS_ID}"
 
             # Cleanup
             rm -f frontend.zip
