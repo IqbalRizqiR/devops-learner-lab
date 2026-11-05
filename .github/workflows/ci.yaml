@@ -1,7 +1,13 @@
+# =============================================================================
+# TechnoDev - CI Pipeline
+# LKS Nasional 2026 · Cloud Computing · Modul 3
+# Task 16: Build + test on pull request
+# =============================================================================
+
 name: CI Pipeline
 
 on:
-  push:
+  pull_request:
     branches: [main]
 
 jobs:
@@ -47,22 +53,22 @@ jobs:
 
       - name: Test Lambda handler imports - user-api
         run: |
-          sudo docker run --rm devops/user-api:test \
+          sudo docker run --entrypoint "" --rm devops/user-api:test \
             python -c "import app; print('user-api handler OK')"
 
       - name: Test Lambda handler imports - order-api
         run: |
-          sudo docker run --rm devops/order-api:test \
+          sudo docker run --entrypoint "" --rm devops/order-api:test \
             python -c "import app; print('order-api handler OK')"
 
       - name: Test Lambda handler imports - notification-worker
         run: |
-          sudo docker run --rm devops/notif-worker:test \
+          sudo docker run --entrypoint "" --rm devops/notif-worker:test \
             python -c "import app; print('notification-worker handler OK')"
 
       - name: Test Lambda handler imports - websocket-api
         run: |
-          sudo docker run --rm devops/websocket-api:test \
+          sudo docker run --entrypoint "" --rm devops/websocket-api:test \
             python -c "import app; print('websocket-api handler OK')"
 
       - name: Verify frontend
