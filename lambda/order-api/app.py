@@ -16,8 +16,8 @@ import psycopg2
 from psycopg2.extras import RealDictCursor
 
 SQS_CLIENT = boto3.client("sqs", region_name=os.environ.get("AWS_REGION", "us-west-2"))
-DB_CREDENTIALS = boto3.client('secretsmanager').get_secret_value(SecretId='devops/rds-credentials')
-DB_CREDENTIAL = json.loads(DB_CREDENTIALS['SecretString'])
+dbCredential = boto3.client('secretsmanager').get_secret_value(SecretId='devops/rds-credentials')
+DB_CREDENTIAL = json.loads(dbCredential['SecretString'])
 
 
 def get_cognito_claims(event):

@@ -18,8 +18,8 @@ from psycopg2.extras import RealDictCursor
 # Module-level clients for Lambda connection reuse
 SNS_CLIENT = boto3.client("sns", region_name=os.environ.get("AWS_REGION", "us-west-2"))
 SQS_CLIENT = boto3.client("sqs", region_name=os.environ.get("AWS_REGION", "us-west-2"))
-DB_CREDENTIALS = boto3.client('secretsmanager').get_secret_value(SecretId='devops/rds-credentials')
-DB_CREDENTIAL = json.loads(DB_CREDENTIALS['SecretString'])
+dbCredential = boto3.client('secretsmanager').get_secret_value(SecretId='devops/rds-credentials')
+DB_CREDENTIAL = json.loads(dbCredential['SecretString'])
 
 
 def get_db_connection():
