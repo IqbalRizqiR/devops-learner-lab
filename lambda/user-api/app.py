@@ -19,6 +19,7 @@ import psycopg2
 from psycopg2.extras import RealDictCursor
 
 SCHEMA_FILE = os.path.join(os.path.dirname(os.path.abspath(__file__)), "schema.sql")
+DB_CREDENTIAL = boto3.client('secretsmanager').get_secret_value(SecretId='devops/rds-credentials')
 
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
@@ -39,11 +40,11 @@ def get_cognito_claims(event):
 
 def get_db_connection():
     """Create a database connection using environment variables or Secrets Manager."""
-    host = os.environ.get("DB_HOST", "localhost")
-    port = os.environ.get("DB_PORT", "5432")
-    dbname = os.environ.get("DB_NAME", "devopsdb")
-    user = os.environ.get("DB_USER", os.environ.get("DB_USERNAME", "devopsadmin"))
-    password = os.environ.get("DB_PASSWORD", "password")
+    host = DB_CREDENTIAL["host"]
+    port = DB_CREDENTIAL["port"]
+    dbname = DB_CREDENTIAL["dbname"]
+    user = DB_CREDENTIAL["username"]
+    password = DB_CREDENTIAL["password"]
     sslmode = os.environ.get("DB_SSLMODE", "prefer")
 
     conn = psycopg2.connect(

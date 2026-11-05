@@ -18,15 +18,16 @@ from psycopg2.extras import RealDictCursor
 # Module-level clients for Lambda connection reuse
 SNS_CLIENT = boto3.client("sns", region_name=os.environ.get("AWS_REGION", "us-west-2"))
 SQS_CLIENT = boto3.client("sqs", region_name=os.environ.get("AWS_REGION", "us-west-2"))
+DB_CREDENTIAL = boto3.client('secretsmanager').get_secret_value(SecretId='devops/rds-credentials')
 
 
 def get_db_connection():
     """Create a database connection using environment variables."""
-    host = os.environ.get("DB_HOST", "localhost")
-    port = os.environ.get("DB_PORT", "5432")
-    dbname = os.environ.get("DB_NAME", "devopsdb")
-    user = os.environ.get("DB_USER", "devopsadmin")
-    password = os.environ.get("DB_PASSWORD", "password")
+    host = DB_CREDENTIAL["host"]
+    port = DB_CREDENTIAL["port"]
+    dbname = DB_CREDENTIAL["dbname"]
+    user = DB_CREDENTIAL["username"]
+    password = DB_CREDENTIAL["password"]
 
     conn = psycopg2.connect(
         host=host,

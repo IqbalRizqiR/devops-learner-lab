@@ -11,8 +11,8 @@ on:
     branches: [main]
 
 env:
-  ECR_REGISTRY: "248837107763.dkr.ecr.us-west-2.amazonaws.com"
-  ACCOUNT_ID: 248837107763
+  ECR_REGISTRY: 
+  ACCOUNT_ID: 
   AWS_REGION: us-west-2
   PREFIX: devops
 
