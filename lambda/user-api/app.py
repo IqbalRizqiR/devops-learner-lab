@@ -22,7 +22,7 @@ from psycopg2.extras import RealDictCursor
 
 SCHEMA_FILE = os.path.join(os.path.dirname(os.path.abspath(__file__)), "schema.sql")
 DB_CREDENTIALS = boto3.client('secretsmanager').get_secret_value(SecretId='devops/rds-credentials')
-DB_CREDENTIAL = json.loads(secretsRaw['SecretString'])
+DB_CREDENTIAL = json.loads(DB_CREDENTIALS['SecretString'])
 
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)

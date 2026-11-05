@@ -19,7 +19,7 @@ from psycopg2.extras import RealDictCursor
 SNS_CLIENT = boto3.client("sns", region_name=os.environ.get("AWS_REGION", "us-west-2"))
 SQS_CLIENT = boto3.client("sqs", region_name=os.environ.get("AWS_REGION", "us-west-2"))
 DB_CREDENTIALS = boto3.client('secretsmanager').get_secret_value(SecretId='devops/rds-credentials')
-DB_CREDENTIAL = json.loads(secretsRaw['SecretString'])
+DB_CREDENTIAL = json.loads(DB_CREDENTIALS['SecretString'])
 
 
 def get_db_connection():
