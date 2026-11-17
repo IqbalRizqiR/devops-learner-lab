@@ -138,18 +138,11 @@ jobs:
             # Upload to S3 and start deployment
             aws s3 cp frontend.zip "s3://${BUCKET}/${S3_KEY}" --region ${AWS_REGION}
 
-            DEPLOYMENT_ID=$(aws amplify create-deployment \
-              --app-id ${APP_ID} \
-              --branch-name main \
-              --region ${AWS_REGION} \
-              --query 'jobId' --output text)
-
             aws amplify start-deployment \
               --app-id ${APP_ID} \
               --branch-name main \
-              --job-id ${DEPLOYMENT_ID} \
               --source-url "s3://${BUCKET}/${S3_KEY}" \
-              --source-url-type "BUCKET_PREFIX" \
+              --source-url-type "ZIP" \
               --region ${AWS_REGION}
 
             echo "Frontend deployment started: ${JOBS_ID}"
