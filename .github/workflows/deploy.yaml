@@ -149,6 +149,7 @@ jobs:
               --branch-name main \
               --job-id ${DEPLOYMENT_ID} \
               --source-url "s3://${BUCKET}/${S3_KEY}" \
+              --source-type "BUCKET_PREFIX" \
               --region ${AWS_REGION}
 
             echo "Frontend deployment started: ${JOBS_ID}"
