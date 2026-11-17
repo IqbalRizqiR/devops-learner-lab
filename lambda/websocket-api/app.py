@@ -31,6 +31,7 @@ from psycopg2.extras import RealDictCursor
 # Module-level clients for Lambda connection reuse
 API_GW_CLIENT = boto3.client(
     "apigatewaymanagementapi",
+    region_name=os.environ.get("AWS_REGION", "us-west-2")
     endpoint_url=os.environ.get(
         "WEBSOCKET_ENDPOINT",
         "https://placeholder.execute-api.us-west-2.amazonaws.com/prod",
