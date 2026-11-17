@@ -145,7 +145,7 @@ jobs:
               --source-url-type "ZIP" \
               --region ${AWS_REGION}
 
-            echo "Frontend deployment started: ${JOBS_ID}"
+            echo "Frontend deployment started"
 
             # Cleanup
             rm -f frontend.zip
