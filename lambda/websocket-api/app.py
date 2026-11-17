@@ -37,7 +37,7 @@ API_GW_CLIENT = boto3.client(
     ),
 )
 SQS_CLIENT = boto3.client("sqs", region_name=os.environ.get("AWS_REGION", "us-west-2"))
-dbCredential = boto3.client('secretsmanager').get_secret_value(SecretId='devops/rds-credentials')
+dbCredential = boto3.client('secretsmanager', region_name=os.environ.get("AWS_REGION", "us-west-2")).get_secret_value(SecretId='devops/rds-credentials')
 DB_CREDENTIAL = json.loads(dbCredential['SecretString'])
 
 
