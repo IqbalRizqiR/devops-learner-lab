@@ -5,7 +5,7 @@ RUN pip install --no-cache-dir \
     psycopg2-binary \
     boto3
 
-# Copy application code
+# Copy application codess
 COPY app.py ${LAMBDA_TASK_ROOT}/
 
 # Set the handler
